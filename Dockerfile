@@ -67,18 +67,16 @@ RUN cd /usr/local/src && \
     git clone https://github.com/freeswitch/sofia-sip.git && \
     cd sofia-sip && \
     ./bootstrap.sh -j && \
-    ./configure && make && make install && \
-    export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig && \
-    ldconfig
-
-
+    ./configure && make && make install
 
 # 安装Freeswitch
 RUN cd /usr/local/src/ && \
     wget https://files.freeswitch.org/releases/freeswitch/freeswitch-1.10.6.-release.tar.gz && \
     tar -zxf freeswitch-1.10.6.-release.tar.gz && \
     cd /usr/local/src/freeswitch-1.10.6.-release && \
-    ./devel-bootstrap.sh && \
+    export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:${PKG_CONFIG_PATH} && \
+    ldconfig && \
+    ./bootstrap.sh && \
     ./configure  && \
     make -j && make install
 
