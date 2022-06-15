@@ -29,7 +29,7 @@ RUN cd /usr/local/src/ && \
     cd /usr/local/src/freeswitch-1.10.6 && \
     export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:${PKG_CONFIG_PATH} && \
     ldconfig && \
-    ./devel-bootstrap.sh && \
+    ./bootstrap.sh && \
     ./configure  && \
     make && make install
 
