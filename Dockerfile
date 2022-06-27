@@ -31,7 +31,9 @@ RUN cd /usr/local/src/ && \
     ldconfig && \
     ./bootstrap.sh && \
     ./configure  && \
-    make && make install
+    make && make install && \
+    make cd-sounds-install && \
+    make cd-moh-install
 
 # 软链接
 RUN ln -sf /usr/local/freeswitch/bin/freeswitch /usr/bin/  && \
