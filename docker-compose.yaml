@@ -1,0 +1,10 @@
+version: "3"
+services:
+  freeswitch:
+    image: 'xsdhy/freeswitch:1.10.6'
+    container_name: freeswitch
+    network_mode: host
+    volumes:
+      - "./config/conf:/usr/local/freeswitch/conf"
+      - "./config/sounds/test:/usr/local/freeswitch/sounds/test"
+      - "./recordings:/usr/local/freeswitch/recordings"

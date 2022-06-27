@@ -1,0 +1,17 @@
+
+<include>
+  <user id="99999">
+    <params>
+      <param name="password" value="1234"/>
+      <param name="vm-password" value="99999"/>
+    </params>
+    <variables>
+      <variable name="toll_allow" value="domestic,international,local"/>
+      <variable name="accountcode" value="99999"/>
+      <variable name="user_context" value="default"/>
+      <variable name="outbound_caller_id_name" value="$${outbound_caller_name}"/>
+      <variable name="outbound_caller_id_number" value="$${outbound_caller_id}"/>
+      <variable name="callgroup" value="techsupport"/>
+    </variables>
+  </user>
+</include>
