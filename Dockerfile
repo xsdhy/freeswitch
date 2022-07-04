@@ -24,13 +24,13 @@ RUN cd /usr/local/src && \
 
 # 安装Freeswitch
 RUN cd /usr/local/src/ && \
-    wget https://github.com/signalwire/freeswitch/archive/refs/tags/v1.10.6.tar.gz -O freeswitch-1.10.6.tar.gz && \
-    tar -zxf freeswitch-1.10.6.tar.gz && \
-    cd /usr/local/src/freeswitch-1.10.6 && \
+    wget https://github.com/signalwire/freeswitch/archive/refs/tags/v1.10.7.tar.gz -O freeswitch-1.10.7.tar.gz && \
+    tar -zxf freeswitch-1.10.7.tar.gz && \
+    cd /usr/local/src/freeswitch-1.10.7 && \
     export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:${PKG_CONFIG_PATH} && \
     ldconfig && \
     ./bootstrap.sh && \
-    ./configure  && \
+    ./configure --enable-unimrcp && \
     make && make install && \
     make cd-sounds-install && \
     make cd-moh-install

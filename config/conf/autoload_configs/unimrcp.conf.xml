@@ -1,9 +1,9 @@
 <configuration name="unimrcp.conf" description="UniMRCP Client">
   <settings>
     <!-- UniMRCP profile to use for TTS -->
-    <param name="default-tts-profile" value="voxeo-prophecy8.0-mrcp1"/>
+    <param name="default-tts-profile" value="aisv2"/>
     <!-- UniMRCP profile to use for ASR -->
-    <param name="default-asr-profile" value="voxeo-prophecy8.0-mrcp1"/>
+    <param name="default-asr-profile" value="aisv2"/>
     <!-- UniMRCP logging level to appear in freeswitch.log.  Options are:
          EMERGENCY|ALERT|CRITICAL|ERROR|WARNING|NOTICE|INFO|DEBUG -->
     <param name="log-level" value="DEBUG"/>
