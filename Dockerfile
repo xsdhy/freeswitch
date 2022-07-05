@@ -1,4 +1,4 @@
-FROM debian:10
+FROM debian:11
 
 RUN apt-get update && apt-get install -yq gnupg2 wget lsb-release git && \
     wget --http-user=freeswitch --http-password=pat_67bLbQi6g9DVhQowPCXkPy9d -O /usr/share/keyrings/signalwire-freeswitch-repo.gpg https://freeswitch.signalwire.com/repo/deb/debian-release/signalwire-freeswitch-repo.gpg  && \
@@ -29,11 +29,16 @@ RUN cd /usr/local/src/ && \
     cd /usr/local/src/freeswitch-1.10.7 && \
     export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:${PKG_CONFIG_PATH} && \
     ldconfig && \
-    ./bootstrap.sh && \
-    ./configure --enable-unimrcp && \
+    ./bootstrap.sh -j && \
+    ./configure && \
     make && make install && \
     make cd-sounds-install && \
-    make cd-moh-install
+    make cd-moh-install  && \
+    cd libs/unimrcp && \
+    autoreconf -fiv && \
+    cd -  && \
+    cd src/mod/asr_tts/mod_unimrcp && \
+    make && make install 
 
 # 软链接
 RUN ln -sf /usr/local/freeswitch/bin/freeswitch /usr/bin/  && \

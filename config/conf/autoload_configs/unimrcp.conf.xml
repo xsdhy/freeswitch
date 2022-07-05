@@ -1,9 +1,9 @@
 <configuration name="unimrcp.conf" description="UniMRCP Client">
   <settings>
     <!-- UniMRCP profile to use for TTS -->
-    <param name="default-tts-profile" value="aisv2"/>
+    <param name="default-tts-profile" value="mymrcp"/>
     <!-- UniMRCP profile to use for ASR -->
-    <param name="default-asr-profile" value="aisv2"/>
+    <param name="default-asr-profile" value="mymrcp"/>
     <!-- UniMRCP logging level to appear in freeswitch.log.  Options are:
          EMERGENCY|ALERT|CRITICAL|ERROR|WARNING|NOTICE|INFO|DEBUG -->
     <param name="log-level" value="DEBUG"/>

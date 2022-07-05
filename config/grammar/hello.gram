@@ -1,0 +1,4 @@
+#JSGF V1.0;
+/** JSGF Grammar for example */
+grammar example;
+public <results> = [];
