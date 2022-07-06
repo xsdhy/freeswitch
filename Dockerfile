@@ -30,7 +30,6 @@ RUN cd /usr/local/src/ && \
     export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:${PKG_CONFIG_PATH} && \
     ldconfig && \
     ./bootstrap.sh -j && \
-    sed 's/要被取代的字串/新的字串/g' && \
     ./configure && \
     make && make install && \
     make cd-sounds-install && \
