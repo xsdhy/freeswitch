@@ -33,4 +33,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: xsdhy/freeswitch:1.10.7.mrcp
+          tags: xsdhy/freeswitch:1.10.7.mrcp2
