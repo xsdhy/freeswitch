@@ -1,5 +1,7 @@
 FROM debian:11
 
+COPY freeswitch-1.10.7.mrcp.tar.gz /usr/local/src
+
 RUN apt-get update && apt-get install -yq gnupg2 wget lsb-release git && \
     wget --http-user=freeswitch --http-password=pat_67bLbQi6g9DVhQowPCXkPy9d -O /usr/share/keyrings/signalwire-freeswitch-repo.gpg https://freeswitch.signalwire.com/repo/deb/debian-release/signalwire-freeswitch-repo.gpg  && \
     echo "machine freeswitch.signalwire.com login freeswitch password pat_67bLbQi6g9DVhQowPCXkPy9d" > /etc/apt/auth.conf && \
@@ -24,8 +26,7 @@ RUN cd /usr/local/src && \
 
 # 安装Freeswitch
 RUN cd /usr/local/src/ && \
-    wget https://github.com/signalwire/freeswitch/archive/refs/tags/v1.10.7.tar.gz -O freeswitch-1.10.7.tar.gz && \
-    tar -zxf freeswitch-1.10.7.tar.gz && \
+    tar -zxf freeswitch-1.10.7.mrcp.tar.gz && \
     cd /usr/local/src/freeswitch-1.10.7 && \
     export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:${PKG_CONFIG_PATH} && \
     ldconfig && \
