@@ -3593,6 +3593,7 @@ static apt_bool_t recog_message_handler(const mrcp_app_message_t *app_message)
  */
 static apt_bool_t recog_on_message_receive(mrcp_application_t *application, mrcp_session_t *session, mrcp_channel_t *channel, mrcp_message_t *message)
 {
+	switch_event_t *event= NULL;
 	speech_channel_t *schannel = (speech_channel_t *) mrcp_application_channel_object_get(channel);
 	mrcp_recog_header_t *recog_hdr = (mrcp_recog_header_t *) mrcp_resource_header_get(message);
 	if (message->start_line.message_type == MRCP_MESSAGE_TYPE_RESPONSE) {
@@ -3673,7 +3674,7 @@ static apt_bool_t recog_on_message_receive(mrcp_application_t *application, mrcp
 					recog_channel_set_result_headers(schannel, recog_hdr);
 					recog_channel_set_results(schannel, message->body.buf);
 					// xsdhy add event begin
-					if ((status = switch_event_create(&event, SWITCH_EVENT_CUSTOM)) == SWITCH_STATUS_SUCCESS) {
+					if (switch_event_create(&event, SWITCH_EVENT_CUSTOM) == SWITCH_STATUS_SUCCESS) {
 						event->subclass_name = strdup("unimrcp::asrend");
 						switch_event_add_header_string(event, SWITCH_STACK_BOTTOM, "Event-Subclass", event->subclass_name);
 						switch_event_add_header_string(event, SWITCH_STACK_BOTTOM, "MRCP-Body", message->body.buf);
