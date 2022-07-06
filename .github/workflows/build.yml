@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'main'
+      - '1.10.7.mrcp'
 
 jobs:
   docker:
@@ -12,6 +13,8 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v3
+        with: 
+          ref: 1.10.7.mrcp
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
