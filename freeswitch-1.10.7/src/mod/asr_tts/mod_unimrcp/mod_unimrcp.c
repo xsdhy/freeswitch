@@ -3673,7 +3673,7 @@ static apt_bool_t recog_on_message_receive(mrcp_application_t *application, mrcp
 					recog_channel_set_result_headers(schannel, recog_hdr);
 					recog_channel_set_results(schannel, message->body.buf);
 					// xsdhy add event begin
-					if (switch_event_create(&event, SWITCH_EVENT_CUSTOM) == SWITCH_STATUS_SUCCESS) {
+					if ((status = switch_event_create(&event, SWITCH_EVENT_CUSTOM)) == SWITCH_STATUS_SUCCESS) {
 						event->subclass_name = strdup("unimrcp::asrend");
 						switch_event_add_header_string(event, SWITCH_STACK_BOTTOM, "Event-Subclass", event->subclass_name);
 						switch_event_add_header_string(event, SWITCH_STACK_BOTTOM, "MRCP-Body", message->body.buf);
