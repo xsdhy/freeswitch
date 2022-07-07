@@ -3673,22 +3673,7 @@ static apt_bool_t recog_on_message_receive(mrcp_application_t *application, mrcp
 				if (message->body.buf[message->body.length - 1] == '\0') {
 					recog_channel_set_result_headers(schannel, recog_hdr);
 					recog_channel_set_results(schannel, message->body.buf);
-					// xsdhy add event begin
-
-					// if (switch_event_create(&event, SWITCH_EVENT_CUSTOM) == SWITCH_STATUS_SUCCESS) {
-					// 	event->subclass_name = strdup("unimrcp::asrend");
-					// 	switch_event_add_header_string(event, SWITCH_STACK_BOTTOM, "Event-Subclass", event->subclass_name);
-					// 	switch_event_add_header_string(event, SWITCH_STACK_BOTTOM, "MRCP-Body", message->body.buf);
-					// 	switch_event_fire(&event);
-					// }
 					
-					if (switch_event_create_subclass(&event,SWITCH_EVENT_CUSTOM,"unimrcp::asrend") == SWITCH_STATUS_SUCCESS)
-					{
-						switch_event_add_header_string(event, SWITCH_STACK_BOTTOM, "MRCP-Body", message->body.buf);
-						switch_event_fire(&event);
-					}
-					
-					// xsdhy add event end
 				} else {
 					/* string is not null terminated */
 					char *result = (char *) switch_core_alloc(schannel->memory_pool, message->body.length + 1);
@@ -3699,6 +3684,30 @@ static apt_bool_t recog_on_message_receive(mrcp_application_t *application, mrcp
 					recog_channel_set_result_headers(schannel, recog_hdr);
 					recog_channel_set_results(schannel, result);
 				}
+
+				switch_log_printf(SWITCH_CHANNEL_UUID_LOG(schannel->session_uuid), SWITCH_LOG_DEBUG, "===>start send event 1\n");
+
+				// xsdhy add event begin
+
+				if (switch_event_create(&event, SWITCH_EVENT_CUSTOM) == SWITCH_STATUS_SUCCESS) {
+					event->subclass_name = strdup("unimrcp::asrend");
+					switch_event_add_header_string(event, SWITCH_STACK_BOTTOM, "method", "1");
+					switch_event_add_header_string(event, SWITCH_STACK_BOTTOM, "Event-Subclass", event->subclass_name);
+					switch_event_add_header_string(event, SWITCH_STACK_BOTTOM, "MRCP-Body", message->body.buf);
+					switch_event_fire(&event);
+					switch_log_printf(SWITCH_CHANNEL_UUID_LOG(schannel->session_uuid), SWITCH_LOG_DEBUG, "===>start send event 1 ok\n");
+				}
+				
+				switch_log_printf(SWITCH_CHANNEL_UUID_LOG(schannel->session_uuid), SWITCH_LOG_DEBUG, "===>start send event 2\n");
+				if (switch_event_create_subclass(&event,SWITCH_EVENT_CUSTOM,"unimrcp::asrend") == SWITCH_STATUS_SUCCESS)
+				{
+					switch_event_add_header_string(event, SWITCH_STACK_BOTTOM, "MRCP-Body", message->body.buf);
+					 switch_event_add_header_string(event, SWITCH_STACK_BOTTOM, "method", "2");
+					switch_event_fire(&event);
+					switch_log_printf(SWITCH_CHANNEL_UUID_LOG(schannel->session_uuid), SWITCH_LOG_DEBUG, "===>start send event 2 ok\n");
+				}
+				
+				// xsdhy add event end
 			} else {
 				char *completion_cause = switch_mprintf("Completion-Cause: %03d", recog_hdr->completion_cause);
 				switch_log_printf(SWITCH_CHANNEL_UUID_LOG(schannel->session_uuid), SWITCH_LOG_DEBUG, "(%s) No result\n", schannel->name);
