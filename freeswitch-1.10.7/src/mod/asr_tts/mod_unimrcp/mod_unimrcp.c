@@ -3687,7 +3687,6 @@ static apt_bool_t recog_on_message_receive(mrcp_application_t *application, mrcp
 				// xsdhy add event begin
 				if (switch_event_create_subclass(&event,SWITCH_EVENT_CUSTOM,"unimrcp::asrend") == SWITCH_STATUS_SUCCESS)
 				{
-					switch_event_add_header_string(event, SWITCH_STACK_BOTTOM, "callee", "1001");
 					switch_event_add_header_string(event, SWITCH_STACK_BOTTOM, "uuid", schannel->session_uuid);
 					switch_event_add_header_string(event, SWITCH_STACK_BOTTOM, "MRCP-Body", message->body.buf);
 					switch_event_fire(&event);

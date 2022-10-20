@@ -11,6 +11,9 @@
 
     <list name="lan" default="deny">
       <node type="allow" cidr="127.0.0.0/24"/>
+      <node type="allow" cidr="10.10.0.0/16"/>
+      <node type="allow" cidr="10.20.0.0/16"/>
+      <node type="allow" cidr="10.30.0.0/16"/>
       <node type="allow" cidr="10.40.0.0/16"/>
       <node type="allow" cidr="10.50.0.0/16"/>
     </list>

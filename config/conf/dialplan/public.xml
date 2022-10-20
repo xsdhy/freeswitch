@@ -13,8 +13,10 @@
 <include>
   <context name="public">
    <extension name="incoming">
-      <condition field="destination_number" expression="^(\d{6,20})$">
-        <action application="answer" data="" />
+      <condition field="destination_number" expression="^(\d{4,20})$">
+        <action application="pre_answer" data="" />
+        <action application="set" data="hangup_after_bridge=true" />
+        <action application="set" data="continue_on_fail=flase" />
         <action application="park" data="" />
       </condition>
     </extension>    

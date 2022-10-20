@@ -6,7 +6,7 @@
     <param name="client-port" value="5161"/>
     
     <param name="server-ip" value="10.10.0.11"/>
-    <param name="server-port" value="1544"/>
+    <param name="server-port" value="9060"/>
 
     <!--param name="force-destination" value="1"/-->
     <param name="sip-transport" value="udp"/>

@@ -1,10 +1,15 @@
 version: "3"
 services:
   freeswitch:
-    image: 'xsdhy/freeswitch:1.10.6'
+    image: 'xsdhy/freeswitch:1.10.7.mrcp'
     container_name: freeswitch
     network_mode: host
+    environment:
+      - TIME_ZONE=Asia/Shanghai
     volumes:
+      - "/etc/localtime:/etc/localtime"
       - "./config/conf:/usr/local/freeswitch/conf"
       - "./config/sounds/test:/usr/local/freeswitch/sounds/test"
+      - "./config/grammar:/usr/local/freeswitch/grammar"
+      - "./config/scripts:/usr/local/freeswitch/scripts"
       - "./recordings:/usr/local/freeswitch/recordings"
