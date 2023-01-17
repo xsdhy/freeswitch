@@ -3,7 +3,7 @@ name: docker
 on:
   push:
     branches:
-      - 'main'
+      - '1.10.7.g729'
 
 jobs:
   docker:
