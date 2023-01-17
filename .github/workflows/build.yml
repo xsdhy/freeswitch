@@ -30,4 +30,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: xsdhy/freeswitch:1.10.7
+          tags: xsdhy/freeswitch:1.10.7.g729
