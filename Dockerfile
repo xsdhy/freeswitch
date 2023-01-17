@@ -46,8 +46,9 @@ RUN cd /usr/local/src/ && \
     git clone https://github.com/xadhoom/mod_bcg729.git && \
     cd mod_bcg729 && \
     git clone https://github.com/BelledonneCommunications/bcg729.git && \
-    make FS_INCLUDES=/usr/local/freeswitch/include/freeswitch FS_MODULES=/usr/local/freeswitch/mod && \
-    make install && \
+    make FS_INCLUDES=/usr/local/freeswitch/include/freeswitch FS_MODULES=/usr/local/freeswitch/mod
+    
+RUN make install && \
     mv mod_bcg729.so /usr/local/freeswitch/mod/
 
 # 软链接
