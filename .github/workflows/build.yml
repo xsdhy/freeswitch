@@ -3,7 +3,11 @@ name: docker
 on:
   push:
     branches:
-      - '1.10.7.g729'
+      - '*'
+
+env:
+  IMAGE_NAME: 'xsdhy/freeswitch'
+  IMAGE_TAG_NAME: ${{ github.ref_name }}
 
 jobs:
   docker:
@@ -30,4 +34,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: xsdhy/freeswitch:1.10.7.g729
+          tags: IMAGE_NAME:IMAGE_TAG_NAME
