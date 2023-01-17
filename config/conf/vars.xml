@@ -256,9 +256,9 @@
        127 - BV32
 
   -->
-  <X-PRE-PROCESS cmd="set" data="global_codec_prefs=PCMU,PCMA"/>
-  <X-PRE-PROCESS cmd="set" data="outbound_codec_prefs=PCMU,PCMA"/>
-
+  <X-PRE-PROCESS cmd="set" data="global_codec_prefs=PCMU,PCMA,G729"/>
+  <X-PRE-PROCESS cmd="set" data="outbound_codec_prefs=PCMU,PCMA,G729"/>
+  <X-PRE-PROCESS cmd="set" data="media_mix_inbound_outbound_codecs=true"/>
   <!--
       xmpp_client_profile and xmpp_server_profile
       xmpp_client_profile can be any string.
