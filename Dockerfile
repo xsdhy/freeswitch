@@ -1,4 +1,4 @@
-FROM debian:11
+FROM debian:11 as builder
 
 RUN apt-get update && apt-get install -yq gnupg2 wget lsb-release git && \
     wget --http-user=freeswitch --http-password=pat_67bLbQi6g9DVhQowPCXkPy9d -O /usr/share/keyrings/signalwire-freeswitch-repo.gpg https://freeswitch.signalwire.com/repo/deb/debian-release/signalwire-freeswitch-repo.gpg  && \
@@ -47,5 +47,18 @@ RUN apt-get update && apt-get install -yq gnupg2 wget lsb-release git && \
     # 软链接
     ln -sf /usr/local/freeswitch/bin/freeswitch /usr/bin/  && \
     ln -sf /usr/local/freeswitch/bin/fs_cli /usr/bin/
+
+FROM debian:11 as prod
+
+COPY --from=0 /usr/local/freeswitch /usr/local/freeswitch
+COPY --from=0 /usr/lib/x86_64-linux-gnu/libspeex.so* /usr/lib/x86_64-linux-gnu/
+COPY --from=0 /usr/lib/x86_64-linux-gnu/libspeexdsp.so* /usr/lib/x86_64-linux-gnu/
+COPY --from=0 /usr/lib/x86_64-linux-gnu/libodbc.so* /usr/lib/x86_64-linux-gnu/
+COPY --from=0 /usr/lib/x86_64-linux-gnu/libltdl.so* /usr/lib/x86_64-linux-gnu/
+COPY --from=0 /usr/lib/libtpl.so* /usr/lib/
+COPY --from=0 /usr/lib/x86_64-linux-gnu/libspandsp.so* /usr/lib/x86_64-linux-gnu/
+COPY --from=0 /usr/local/lib/libspandsp.so* /usr/local/lib/
+COPY --from=0 /usr/lib/libsofia-sip-ua.so* /usr/lib/
+COPY --from=0 /usr/local/lib/libsofia-sip-ua.so* /usr/local/lib/
 
 ENTRYPOINT ["freeswitch","-c","-nosql"]
