@@ -5,6 +5,7 @@ on:
     branches:
       - 'main'
       - '1.10.7.mrcp'
+      - '1.10.7.mrcp.g729'
 
 jobs:
   docker:
