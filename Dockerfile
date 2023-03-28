@@ -38,7 +38,15 @@ RUN cd /usr/local/src/ && \
     autoreconf -fiv && \
     cd -  && \
     cd src/mod/asr_tts/mod_unimrcp && \
-    make && make install 
+    make && make install && \
+    # 增加G729编码支持
+    cd /usr/local/src/ && \
+    apt-get install -yq cmake && \
+    git clone https://github.com/xadhoom/mod_bcg729.git && \
+    cd mod_bcg729 && \
+    git clone https://github.com/BelledonneCommunications/bcg729.git && \
+    make FS_INCLUDES=/usr/local/freeswitch/include/freeswitch FS_MODULES=/usr/local/freeswitch/mod && \
+    mv mod_bcg729.so /usr/local/freeswitch/mod/ && \
 
 # 软链接
 RUN ln -sf /usr/local/freeswitch/bin/freeswitch /usr/bin/  && \
