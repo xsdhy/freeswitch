@@ -52,7 +52,7 @@ RUN cd /usr/local/src/ && \
     luarocks install luasocket && \
     cd /usr/local/share/lua/5.2 && \
     wget -O xmlSimple.lua https://raw.githubusercontent.com/Cluain/Lua-Simple-XML-Parser/master/xmlSimple.lua && \
-    wget -O dkjson.lua http://dkolf.de/src/dkjson-lua.fsl/raw/dkjson.lua
+    wget -O dkjson.lua https://raw.githubusercontent.com/LuaDist/dkjson/master/dkjson.lua
 
 # 软链接
 RUN ln -sf /usr/local/freeswitch/bin/freeswitch /usr/bin/  && \
