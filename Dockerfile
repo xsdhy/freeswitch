@@ -1,6 +1,6 @@
 FROM debian:11
 
-RUN apt-get update && apt-get install -yq gnupg2 wget lsb-release git && \
+RUN apt-get update && apt-get install -yq gnupg2 wget lsb-release git cmake && \
     wget --http-user=freeswitch --http-password=pat_V7EZtGcr8oHadnZjgBfbbNcB -O /usr/share/keyrings/signalwire-freeswitch-repo.gpg https://freeswitch.signalwire.com/repo/deb/debian-release/signalwire-freeswitch-repo.gpg  && \
     echo "machine freeswitch.signalwire.com login freeswitch password pat_V7EZtGcr8oHadnZjgBfbbNcB" > /etc/apt/auth.conf && \
     echo "deb [signed-by=/usr/share/keyrings/signalwire-freeswitch-repo.gpg] https://freeswitch.signalwire.com/repo/deb/debian-release/ `lsb_release -sc` main" > /etc/apt/sources.list.d/freeswitch.list && \
