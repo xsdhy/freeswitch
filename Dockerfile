@@ -7,18 +7,29 @@ RUN apt-get update && apt-get install -yq gnupg2 wget lsb-release git && \
     echo "deb-src [signed-by=/usr/share/keyrings/signalwire-freeswitch-repo.gpg] https://freeswitch.signalwire.com/repo/deb/debian-release/ `lsb_release -sc` main" >> /etc/apt/sources.list.d/freeswitch.list && \
     apt-get update && \
     apt-get -y build-dep freeswitch && \
+
     # Install spandsp
     cd /usr/local/src && \
     git clone -b fs https://github.com/freeswitch/spandsp.git && \
     cd spandsp && \
     ./bootstrap.sh -j && \
     ./configure && make && make install && \
+
     # Install sofia-sip
     cd /usr/local/src && \
     git clone https://github.com/freeswitch/sofia-sip.git && \
     cd sofia-sip && \
     ./bootstrap.sh -j && \
     ./configure && make && make install && \
+
+    cd /usr/local/src && \
+    git clone -b v1.8.3 https://github.com/signalwire/libks.git && \
+    cd libks && cmake . && make && make install && ldconfig && \
+
+    cd /usr/local/src && \
+    git clone -b v1.3.3 https://github.com/signalwire/signalwire-c.git && \
+    cd signalwire-c && cmake . && make && make install && ldconfig && \
+
     # 安装Freeswitch
     cd /usr/local/src/ && \
     wget https://github.com/signalwire/freeswitch/archive/refs/tags/v1.10.7.tar.gz -O freeswitch-1.10.7.tar.gz && \
