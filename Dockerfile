@@ -49,7 +49,7 @@ RUN apt-get update && apt-get install -yq gnupg2 wget lsb-release git && \
     luarocks install luasocket && \
     cd /usr/local/share/lua/5.2 && \
     wget -O xmlsimple.lua https://raw.githubusercontent.com/Cluain/Lua-Simple-XML-Parser/master/xmlSimple.lua && \
-    wget -O dkjson.lua https://raw.githubusercontent.com/LuaDist/dkjson/master/dkjson.lua
+    wget -O dkjson.lua https://raw.githubusercontent.com/LuaDist/dkjson/master/dkjson.lua && \
     # 软链接
     ln -sf /usr/local/freeswitch/bin/freeswitch /usr/bin/  && \
     ln -sf /usr/local/freeswitch/bin/fs_cli /usr/bin/
