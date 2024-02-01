@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -yq gnupg2 wget lsb-release git && \
     apt-get -y build-dep freeswitch && \
     # Install spandsp
     cd /usr/local/src && \
-    git clone https://github.com/freeswitch/spandsp.git && \
+    git clone -b fs https://github.com/freeswitch/spandsp.git && \
     cd spandsp && \
     ./bootstrap.sh -j && \
     ./configure && make && make install && \
@@ -44,6 +44,12 @@ RUN apt-get update && apt-get install -yq gnupg2 wget lsb-release git && \
     git clone https://github.com/BelledonneCommunications/bcg729.git && \
     make FS_INCLUDES=/usr/local/freeswitch/include/freeswitch FS_MODULES=/usr/local/freeswitch/mod && \
     mv mod_bcg729.so /usr/local/freeswitch/mod/ && \
+    # 增加lua支持
+    apt-get install -y lua5.2 liblua5.2-dev luarocks && \
+    luarocks install luasocket && \
+    cd /usr/local/share/lua/5.2 && \
+    wget -O xmlsimple.lua https://raw.githubusercontent.com/Cluain/Lua-Simple-XML-Parser/master/xmlSimple.lua && \
+    wget -O dkjson.lua https://raw.githubusercontent.com/LuaDist/dkjson/master/dkjson.lua
     # 软链接
     ln -sf /usr/local/freeswitch/bin/freeswitch /usr/bin/  && \
     ln -sf /usr/local/freeswitch/bin/fs_cli /usr/bin/
