@@ -1,6 +1,6 @@
 FROM debian:11
 
-RUN apt-get update && apt-get install -yq gnupg2 wget lsb-release git cmake && \
+RUN apt-get update && apt-get install -yq gnupg2 wget lsb-release git cmake libshout3-dev libmp3lame-dev libmpg123-dev && \
     wget --http-user=freeswitch --http-password=pat_V7EZtGcr8oHadnZjgBfbbNcB -O /usr/share/keyrings/signalwire-freeswitch-repo.gpg https://freeswitch.signalwire.com/repo/deb/debian-release/signalwire-freeswitch-repo.gpg  && \
     echo "machine freeswitch.signalwire.com login freeswitch password pat_V7EZtGcr8oHadnZjgBfbbNcB" > /etc/apt/auth.conf && \
     echo "deb [signed-by=/usr/share/keyrings/signalwire-freeswitch-repo.gpg] https://freeswitch.signalwire.com/repo/deb/debian-release/ `lsb_release -sc` main" > /etc/apt/sources.list.d/freeswitch.list && \
@@ -34,7 +34,6 @@ RUN apt-get update && apt-get install -yq gnupg2 wget lsb-release git cmake && \
     cd /usr/local/src/ && \
     wget https://github.com/signalwire/freeswitch/archive/refs/tags/v1.10.7.tar.gz -O freeswitch-1.10.7.tar.gz && \
     tar -zxf freeswitch-1.10.7.tar.gz && \
-    cd /usr/local/src/freeswitch-1.10.7 && \
     export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:${PKG_CONFIG_PATH} && \
     ldconfig && \
     ./bootstrap.sh -j && \
@@ -46,6 +45,12 @@ RUN apt-get update && apt-get install -yq gnupg2 wget lsb-release git cmake && \
     autoreconf -fiv && \
     cd -  && \
     cd src/mod/asr_tts/mod_unimrcp && \
+    make && make install && \
+    #mp3支持
+    cd /usr/local/src/freeswitch-1.10.7 && \
+     ./bootstrap.sh -j && \
+    ./configure && \
+    cd src/mod/formats/mod_shout/ && \
     make && make install && \
     # 增加G729编码支持
     cd /usr/local/src/ && \
