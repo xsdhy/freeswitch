@@ -34,6 +34,7 @@ RUN apt-get update && apt-get install -yq gnupg2 wget lsb-release git cmake libs
     cd /usr/local/src/ && \
     wget https://github.com/signalwire/freeswitch/archive/refs/tags/v1.10.7.tar.gz -O freeswitch-1.10.7.tar.gz && \
     tar -zxf freeswitch-1.10.7.tar.gz && \
+    cd /usr/local/src/freeswitch-1.10.7 && \
     export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:${PKG_CONFIG_PATH} && \
     ldconfig && \
     ./bootstrap.sh -j && \
