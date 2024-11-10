@@ -43,6 +43,14 @@ RUN cd /usr/local/src && \
     make cd-moh-install && \
     ln -sf /usr/local/freeswitch/bin/freeswitch /usr/bin/  && \
     ln -sf /usr/local/freeswitch/bin/fs_cli /usr/bin/ && \
+    # 增加G729编码支持
+    cd /usr/local/src/ && \
+    apt-get install -yq cmake && \
+    git clone https://github.com/xadhoom/mod_bcg729.git && \
+    cd mod_bcg729 && \
+    git clone https://github.com/BelledonneCommunications/bcg729.git && \
+    make FS_INCLUDES=/usr/local/freeswitch/include/freeswitch FS_MODULES=/usr/local/freeswitch/mod && \
+    mv mod_bcg729.so /usr/local/freeswitch/mod/ && \
     # 增加lua支持
     apt-get install -y lua5.2 liblua5.2-dev luarocks && \
     luarocks install luasocket && \
