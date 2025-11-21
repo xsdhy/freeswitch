@@ -36,6 +36,8 @@ RUN cd /usr/local/src && \
     export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig:${PKG_CONFIG_PATH} && \
     ldconfig && \
     ./bootstrap.sh && \
+    # 启用 mod_xml_curl
+    sed -i 's/^#xml_int\/mod_xml_curl/xml_int\/mod_xml_curl/' modules.conf && \
     sed -i 's/endpoints\/mod_skinny/#endpoints\/mod_skinny/' modules.conf  && \
     ./configure  && \
     make && make install && \
