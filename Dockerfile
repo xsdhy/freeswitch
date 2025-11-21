@@ -40,6 +40,7 @@ RUN cd /usr/local/src && \
     ./configure  && \
     make && make install && \
     make cd-sounds-install && \
+    make mod_xml_curl-install && \
     make cd-moh-install && \
     ln -sf /usr/local/freeswitch/bin/freeswitch /usr/bin/  && \
     ln -sf /usr/local/freeswitch/bin/fs_cli /usr/bin/ && \
